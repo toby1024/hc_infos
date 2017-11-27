@@ -42,8 +42,8 @@ public class User implements UserDetails, Serializable{
     @Getter @Setter @NonNull
     private Date createdAt;
 
-    public User(String weixinId, String phone, int buildingNo, int unitNo, int roomNo){
-        this.username = phone;
+    public User(String username, String weixinId, String phone, int buildingNo, int unitNo, int roomNo){
+        this.username = username;
         this.weixinId = weixinId;
         this.phone = phone;
         this.buildingNo = buildingNo;

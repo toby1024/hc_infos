@@ -45,6 +45,12 @@ public class InfoService {
         return infoRepository.findByStatus(InfoStatusEnum.ACTIVE.getStatus(), pageable);
     }
 
+    public Page<Info> findMy(int page, User user){
+        Sort sort = new Sort(Sort.Direction.DESC, "id");
+        Pageable pageable = new PageRequest(page, pageSize, sort);
+        return infoRepository.findByStatusAndUser(InfoStatusEnum.ACTIVE.getStatus(), user, pageable);
+    }
+
     public Page<Info> findByTitle(String title, int page){
         Sort sort = new Sort(Sort.Direction.DESC, "id");
         Pageable pageable = new PageRequest(page, pageSize, sort);

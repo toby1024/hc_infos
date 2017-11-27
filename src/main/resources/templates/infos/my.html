@@ -1,0 +1,68 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+
+</head>
+<body>
+
+
+<div layout:fragment="content" class="row row-offcanvas row-offcanvas-right">
+
+    <div class="col-xs-12 col-sm-9">
+        <p class="pull-right visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+        </p>
+        <div class="jumbotron">
+            <h1>Hello, HangChen!</h1>
+            <p>杭宸信息发布平台，免费为杭宸业主服务.</p>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 col-lg-4" th:each="info : ${infoPage.getContent()}">
+                <h2 th:text="${info.title}" th:classappend="${info.isRequest()} ? text-success : text-info"></h2>
+                <p th:text="${info.description}"></p>
+                <p><a class="btn"
+                      th:classappend="${info.isRequest()} ? btn-info : btn-success"
+                      th:href="@{/infos/{id}(id=${info.id})}" role="button"
+                      th:text="${info.isRequest()} ? '我有 &raquo;' : '我要 &raquo;'"> </a></p>
+            </div><!--/.col-xs-6.col-lg-4-->
+        </div><!--/row-->
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li>
+                    <a th:href="@{/index(page=${infoPage.hasPrevious() ? infoPage.getNumber()-1 : 0})}"
+                       aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+                <li th:each="pageNo : ${#numbers.sequence(1,infoPage.getTotalPages())}"
+                    th:if="${infoPage.getTotalPages() &lt;= 10}">
+                    <a th:href="@{/index(page=${pageNo-1})}" th:text="${pageNo}"></a>
+                </li>
+
+                <li th:if="${infoPage.getTotalPages() &gt; 10}">
+                    <a th:href="@{/index(page=0)}" th:text="1"></a>
+                    <a th:href="@{/index(page=1)}" th:text="2"></a>
+                    <a th:text="..."></a>
+                    <a th:href="@{/index(page=${infoPage.getTotalPages()-2})}"
+                       th:text="${infoPage.getTotalPages()-1}"></a>
+                    <a th:href="@{/index(page=${infoPage.getTotalPages()-1})}"
+                       th:text="${infoPage.getTotalPages()}"></a>
+                </li>
+
+                <li>
+                    <a th:href="@{/index(page=${infoPage.hasNext() ? infoPage.getNumber()+1 : infoPage.getNumber()})}"
+                       aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div><!--/.col-xs-12.col-sm-9-->
+
+    <div th:replace="~{commons/right :: div}"></div>
+</div><!--/row-->
+
+</body>
+</html>

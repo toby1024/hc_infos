@@ -27,7 +27,7 @@ public class InfoServiceTests {
 
     @Test
     public void createOneTest() {
-        User user = userService.create("123", "weixinid", "13112341234", 3, 1, 1801);
+        User user = userService.create("test", "123", "weixinid", "13112341234", 3, 1, 1801);
         Info info = infoService.createOne(user, "test", "this is a test info", InfoCategoryEnum.REQUEST);
         System.out.println(info);
         Assert.assertEquals(info.getTitle(), "test");
@@ -36,14 +36,14 @@ public class InfoServiceTests {
 
     @Test
     public void findOneTest() {
-        User user = userService.create("123", "weixinid", "13112341234", 3, 1, 1801);
+        User user = userService.create("test", "123", "weixinid", "13112341234", 3, 1, 1801);
         Info info = infoService.createOne(user, "test", "this is a test info", InfoCategoryEnum.REQUEST);
         Assert.assertEquals(info.getTitle(), infoService.findOne(info.getId()).getTitle());
     }
 
     @Test
     public void findByTitleTest() {
-        User user = userService.create("123", "weixinid", "13112341234", 3, 1, 1801);
+        User user = userService.create("test", "123", "weixinid", "13112341234", 3, 1, 1801);
         infoService.createOne(user, "test", "this is a test info", InfoCategoryEnum.REQUEST);
         infoService.createOne(user, "test1", "this is a test info", InfoCategoryEnum.REQUEST);
         infoService.createOne(user, "test2", "this is a test info", InfoCategoryEnum.REQUEST);
@@ -55,7 +55,7 @@ public class InfoServiceTests {
 
     @Test
     public void findAll() {
-        User user = userService.create("123", "weixinid", "13112341234", 3, 1, 1801);
+        User user = userService.create("test", "123", "weixinid", "13112341234", 3, 1, 1801);
         infoService.createOne(user, "test", "this is a test info", InfoCategoryEnum.REQUEST);
         infoService.createOne(user, "test1", "this is a test info", InfoCategoryEnum.REQUEST);
         infoService.createOne(user, "test2", "this is a test info", InfoCategoryEnum.REQUEST);
